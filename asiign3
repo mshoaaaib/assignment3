@@ -1,0 +1,84 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Assignment3
+{
+    class Program
+    {
+
+        public class BasicInfo
+        {
+            public string name;
+            public int idCardNo;
+            public double marks;
+            public int passingYear;
+            public double GPA;
+
+            public string getName()
+            {
+                return name;
+            }
+            public int CNIC()
+            {
+                return idCardNo;
+            }
+            
+        }
+      
+        static void Main(string[] args)
+        {
+       
+            List<BasicInfo> D = new List<BasicInfo>();
+
+            BasicInfo student1 = new BasicInfo()
+            {
+                name = "shoaib",
+                idCardNo = 1,
+                GPA=2.7,
+            };
+
+            BasicInfo student2 = new BasicInfo()
+            {
+                name = "atif",
+                idCardNo = 2,
+                GPA=2.5,
+            };
+
+            BasicInfo student3 = new BasicInfo()
+            {
+                name = "waqar",
+                idCardNo = 3,
+                GPA=2.6,
+            };
+
+            BasicInfo student4 = new BasicInfo()
+            {
+                name = "akhtar",
+                idCardNo = 4,
+                GPA=2.9,
+            };
+
+            D.Add(student1);
+            D.Add(student2);
+            D.Add(student3);
+            D.Add(student4);
+
+             
+            for (int i = 0; i < D.Count; i++)
+            {
+                BasicInfo print= D[i];
+
+                    Console.WriteLine(@"Name: "+ print.name+ 
+               "    Id card Nm: "+  print.idCardNo + "  GPA:  "+print.GPA);
+                
+               
+            }
+            Console.ReadLine();
+
+
+        }
+    }
+}
