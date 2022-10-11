@@ -1,10 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Assignment3
+namespace assignment3
 {
     class Program
     {
@@ -13,8 +14,9 @@ namespace Assignment3
         {
             public string name;
             public int idCardNo;
-            public double marks;
-            public int passingYear;
+            public int assign1Marks;
+            public int assign2Marks;
+            public int totalMarks;
             public double GPA;
 
             public string getName()
@@ -25,58 +27,145 @@ namespace Assignment3
             {
                 return idCardNo;
             }
-            
+
         }
-      
+
         static void Main(string[] args)
         {
-       
+
             List<BasicInfo> D = new List<BasicInfo>();
 
             BasicInfo student1 = new BasicInfo()
-            {
-                name = "shoaib",
+            {name = "shoaib",
                 idCardNo = 1,
-                GPA=2.7,
-            };
-
-            BasicInfo student2 = new BasicInfo()
-            {
-                name = "atif",
+                GPA = 3.1,};
+             BasicInfo student2 = new BasicInfo()
+            {name = "atif",
                 idCardNo = 2,
-                GPA=2.5,
-            };
-
-            BasicInfo student3 = new BasicInfo()
-            {
-                name = "waqar",
+                GPA = 3.6,};
+             BasicInfo student3 = new BasicInfo()
+            {name = "waqar",
                 idCardNo = 3,
-                GPA=2.6,
-            };
-
+                GPA = 2.6, };
             BasicInfo student4 = new BasicInfo()
-            {
-                name = "akhtar",
+            {name = "akhtar",
                 idCardNo = 4,
-                GPA=2.9,
+                GPA = 2.9,};
+            BasicInfo student5 = new BasicInfo()
+            {name = "ali",
+                idCardNo = 5,
+                GPA = 3.2,};
+            BasicInfo student6 = new BasicInfo()
+            {
+                name = "kaleem",
+                idCardNo = 6,
+                GPA = 3.8,
+            };
+            BasicInfo student7 = new BasicInfo()
+            {
+                name = "kareem",
+                idCardNo = 7,
+                GPA = 3.8,
+            };
+            BasicInfo student8 = new BasicInfo()
+            {
+                name = "bablu",
+                idCardNo = 8,
+                GPA = 3,
+            };
+            BasicInfo student9 = new BasicInfo()
+            {
+                name = "baby",
+                idCardNo = 9,
+                GPA = 2.88,
+            };
+            BasicInfo student10 = new BasicInfo()
+            {
+                name = "ali",
+                idCardNo = 10,
+                GPA = 3.2,
             };
 
             D.Add(student1);
             D.Add(student2);
             D.Add(student3);
             D.Add(student4);
+            D.Add(student5);
+            D.Add(student6);
+            D.Add(student7);
+            D.Add(student8);
+            D.Add(student9);
+            D.Add(student10);
+            
 
-             
+
             for (int i = 0; i < D.Count; i++)
             {
-                BasicInfo print= D[i];
+                BasicInfo print = D[i];
 
-                    Console.WriteLine(@"Name: "+ print.name+ 
-               "    Id card Nm: "+  print.idCardNo + "  GPA:  "+print.GPA);
+                Console.WriteLine(@"Name: " + print.name +
+           "    Id card Nm: " + print.idCardNo + "  GPA:  " + print.GPA);
+
+            }
+            Console.WriteLine();
+            List<BasicInfo> selectedStudents = new List<BasicInfo>();
+            
+            for (int i = 0; i < D.Count; i++)
+            {
+
+               BasicInfo GPA_Threshould = D[i];
                 
-               
+                if ( GPA_Threshould.GPA>=3)
+                {
+                    selectedStudents.Add(GPA_Threshould);
+                   
+                }
+            }
+
+            Console.WriteLine("Following Students are Selected for Course:");
+            for ( int i=0; i < selectedStudents.Count; i++)
+            {
+                Console.WriteLine(" Name: " + selectedStudents[i].name + "  Id: " + selectedStudents[i].idCardNo + "  GPA: " + selectedStudents[i].GPA);
+            }
+            Console.WriteLine();
+
+
+            Random ranomMarks = new Random();
+            
+
+            for ( int i=0; i<selectedStudents.Count; i++)
+            {
+                selectedStudents[i].assign1Marks = ranomMarks.Next(100);
+                selectedStudents[i].assign2Marks = ranomMarks.Next(100);
+                selectedStudents[i].totalMarks = selectedStudents[i].assign1Marks + selectedStudents[i].assign2Marks;
+            }
+
+            Console.WriteLine("Marks in each Assignment:");
+            for( int i=0; i<selectedStudents.Count;i++)
+            {
+                Console.WriteLine("Name:  "+selectedStudents[i].name +"  id:  " + selectedStudents[i].idCardNo + "  Marks in 1st Assign: " + selectedStudents[i].assign1Marks + "   :   Marks in 2nd Assign: " + selectedStudents[i].assign2Marks);
+            }
+
+
+            List<BasicInfo> highGradestudent=new List<BasicInfo>();
+            
+            for( int i=0; i< selectedStudents.Count; i++)
+            {
+                if ((selectedStudents[i].totalMarks) /2 >= 90)
+                {
+                    highGradestudent.Add(selectedStudents[i]);
+                }
+            }
+
+            Console.WriteLine("Students having 90% Collective marks are");
+
+            for ( int i=0; i< highGradestudent.Count;i++)
+            {
+                Console.WriteLine("Name:  " + highGradestudent[i].name + "  id:  " + highGradestudent[i].idCardNo + "  Total Marks: " + (highGradestudent[i].totalMarks/2)+"%");
             }
             Console.ReadLine();
+
+
 
 
         }
