@@ -1,173 +1,343 @@
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace assignment3
+namespace assign3
 {
-    class Program
+    internal class Program
     {
-
-        public class BasicInfo
+        
+        class BasicInfo                                  // class containing details of every candidates
         {
             public string name;
-            public int idCardNo;
+            public string city;
             public int assign1Marks;
             public int assign2Marks;
             public int totalMarks;
             public double GPA;
-
-            public string getName()
+            public int idNo;
+            public string setName()
             {
                 return name;
             }
-            public int CNIC()
+            public string setLocation()
             {
-                return idCardNo;
+                return city;
+            }
+            public double setCgpa()
+            {
+                return GPA;
+            }
+            public int setAssign1Marks()
+            {
+                return assign1Marks;
+            }
+            public int setAssign2Marks()
+            {
+                return assign2Marks;
+            }
+            public int setIdNo()
+            {
+                return idNo;
             }
 
+           
         }
 
-        static void Main(string[] args)
+        List<BasicInfo> AllCandidateData()                           //function for regestring candidates
         {
+            List<BasicInfo> ListofAllCandidatesData = new List<BasicInfo>();
 
-            List<BasicInfo> D = new List<BasicInfo>();
-
-            BasicInfo student1 = new BasicInfo()
-            {name = "shoaib",
-                idCardNo = 1,
-                GPA = 3.1,};
-             BasicInfo student2 = new BasicInfo()
-            {name = "atif",
-                idCardNo = 2,
-                GPA = 3.6,};
-             BasicInfo student3 = new BasicInfo()
-            {name = "waqar",
-                idCardNo = 3,
-                GPA = 2.6, };
+            BasicInfo student1 = new BasicInfo()                       //hard coded data for 15 students
+            {
+                name = "shoaib",
+                idNo = 1,
+                GPA = 3.1,
+                city = "lhr",
+            };
+            BasicInfo student2 = new BasicInfo()
+            {
+                name = "atif",
+                idNo = 2,
+                GPA = 3.6,
+                city = "lhr"
+            };
+            BasicInfo student3 = new BasicInfo()
+            {
+                name = "waqar",
+                idNo = 3,
+                GPA = 2.6,
+                city = "rwp"
+            };
             BasicInfo student4 = new BasicInfo()
-            {name = "akhtar",
-                idCardNo = 4,
-                GPA = 2.9,};
+            {
+                name = "akhtar",
+                idNo = 4,
+                GPA = 2.9,
+                city = "rwp"
+            };
             BasicInfo student5 = new BasicInfo()
-            {name = "ali",
-                idCardNo = 5,
-                GPA = 3.2,};
+            {
+                name = "ali",
+                idNo = 5,
+                GPA = 3.2,
+                city = "rwp"
+            };
             BasicInfo student6 = new BasicInfo()
             {
                 name = "kaleem",
-                idCardNo = 6,
+                idNo = 6,
                 GPA = 3.8,
+                city = "lhr"
             };
             BasicInfo student7 = new BasicInfo()
             {
                 name = "kareem",
-                idCardNo = 7,
+                idNo = 7,
                 GPA = 3.8,
+                city = "rwp"
             };
             BasicInfo student8 = new BasicInfo()
             {
                 name = "bablu",
-                idCardNo = 8,
+                idNo = 8,
                 GPA = 3,
+                city = "gujrn"
             };
             BasicInfo student9 = new BasicInfo()
             {
                 name = "baby",
-                idCardNo = 9,
+                idNo = 9,
                 GPA = 2.88,
+                city = "rwp"
             };
             BasicInfo student10 = new BasicInfo()
             {
-                name = "ali",
-                idCardNo = 10,
+                name = "ahmad",
+                idNo = 10,
                 GPA = 3.2,
+                city = "lhr"
+            };
+            BasicInfo student11 = new BasicInfo()
+            {
+                name = "qaim",
+                idNo = 11,
+                GPA = 3.6,
+                city = "lhr"
+            };
+            BasicInfo student12 = new BasicInfo()
+            {
+                name = "subhan",
+                idNo = 12,
+                GPA = 3.9,
+                city = "rwp"
+            };
+            BasicInfo student13 = new BasicInfo()
+            {
+                name = "ismail",
+                idNo = 13,
+                GPA = 2.9,
+                city = "rwp"
+            };
+            BasicInfo student14 = new BasicInfo()
+            {
+                name = "kashif",
+                idNo = 14,
+                GPA = 3.9,
+                city = "rwp"
+            };
+            BasicInfo student15 = new BasicInfo()
+            {
+                name = "abdullah",
+                idNo = 15,
+                GPA = 3.2,
+                city = "rwp"
             };
 
-            D.Add(student1);
-            D.Add(student2);
-            D.Add(student3);
-            D.Add(student4);
-            D.Add(student5);
-            D.Add(student6);
-            D.Add(student7);
-            D.Add(student8);
-            D.Add(student9);
-            D.Add(student10);
-            
 
 
-            for (int i = 0; i < D.Count; i++)
+            ListofAllCandidatesData.Add(student1);                          //adding data to List
+            ListofAllCandidatesData.Add(student2);
+            ListofAllCandidatesData.Add(student3);
+            ListofAllCandidatesData.Add(student4);
+            ListofAllCandidatesData.Add(student5);
+            ListofAllCandidatesData.Add(student6);
+            ListofAllCandidatesData.Add(student7);
+            ListofAllCandidatesData.Add(student8);
+            ListofAllCandidatesData.Add(student9);
+            ListofAllCandidatesData.Add(student10);
+            ListofAllCandidatesData.Add(student11);
+            ListofAllCandidatesData.Add(student12);
+            ListofAllCandidatesData.Add(student13);
+            ListofAllCandidatesData.Add(student14);
+            ListofAllCandidatesData.Add(student15);
+
+            return ListofAllCandidatesData;
+        }
+        List<BasicInfo> SelectedStudents()                           //function for  Selected candidates list who have 3+ CGPA
+        {
+            Program program = new Program();
+            List<BasicInfo> N = program.AllCandidateData();
+
+            List<BasicInfo> SelectedCandidates = new List<BasicInfo>();
+
+            for (int counter = 0; counter < N.Count(); counter++)       // it will store data of only those candidates who have GPA >= 3
             {
-                BasicInfo print = D[i];
-
-                Console.WriteLine(@"Name: " + print.name +
-           "    Id card Nm: " + print.idCardNo + "  GPA:  " + print.GPA);
-
-            }
-            Console.WriteLine();
-            List<BasicInfo> selectedStudents = new List<BasicInfo>();
-            
-            for (int i = 0; i < D.Count; i++)
-            {
-
-               BasicInfo GPA_Threshould = D[i];
-                
-                if ( GPA_Threshould.GPA>=3)
+                if (N[counter].GPA >= 3)
                 {
-                    selectedStudents.Add(GPA_Threshould);
-                   
+
+                    SelectedCandidates.Add(N[counter]);
                 }
             }
 
-            Console.WriteLine("Following Students are Selected for Course:");
-            for ( int i=0; i < selectedStudents.Count; i++)
-            {
-                Console.WriteLine(" Name: " + selectedStudents[i].name + "  Id: " + selectedStudents[i].idCardNo + "  GPA: " + selectedStudents[i].GPA);
-            }
-            Console.WriteLine();
-
-
+            return SelectedCandidates;
+        }
+        List<BasicInfo> AssignmentMarks()                            //Assigning random marks to students 
+        {
+            Program program = new Program();
+            List<BasicInfo> selectedStudents = program.SelectedStudents();
             Random ranomMarks = new Random();
-            
 
-            for ( int i=0; i<selectedStudents.Count; i++)
+
+            for (int i = 0; i < selectedStudents.Count; i++)
             {
-                selectedStudents[i].assign1Marks = ranomMarks.Next(100);
-                selectedStudents[i].assign2Marks = ranomMarks.Next(100);
+                selectedStudents[i].assign1Marks = ranomMarks.Next(80, 100);                                            //Randomly assign marks bw 80-100 to all students
+                selectedStudents[i].assign2Marks = ranomMarks.Next(80, 100);
                 selectedStudents[i].totalMarks = selectedStudents[i].assign1Marks + selectedStudents[i].assign2Marks;
             }
 
-            Console.WriteLine("Marks in each Assignment:");
-            for( int i=0; i<selectedStudents.Count;i++)
-            {
-                Console.WriteLine("Name:  "+selectedStudents[i].name +"  id:  " + selectedStudents[i].idCardNo + "  Marks in 1st Assign: " + selectedStudents[i].assign1Marks + "   :   Marks in 2nd Assign: " + selectedStudents[i].assign2Marks);
-            }
+            return selectedStudents;
+        }
+        List<BasicInfo> HighGradeStudents()                          //function for creating list of 90% marks students
+        {
+            Program program = new Program();
+            List<BasicInfo> N = program.AssignmentMarks();
 
+            List<BasicInfo> highGradestudent = new List<BasicInfo>();
 
-            List<BasicInfo> highGradestudent=new List<BasicInfo>();
-            
-            for( int i=0; i< selectedStudents.Count; i++)
+            for (int i = 0; i < N.Count; i++)                       //it will store the details of candidates if their marks are greater then 90%
             {
-                if ((selectedStudents[i].totalMarks) /2 >= 90)
+                if ((N[i].totalMarks) / 2 >= 90)
                 {
-                    highGradestudent.Add(selectedStudents[i]);
+                    highGradestudent.Add(N[i]);
                 }
             }
+            return highGradestudent;
+        }
+        List<BasicInfo> GetSortedListofallCandidates()               // List of Student with 90% Marks in Ascending Order 
+        {
+            Program program = new Program();
+            List<BasicInfo> N = program.HighGradeStudents();
+            List<BasicInfo> sorted = N.OrderBy(x => x.totalMarks).ToList();
+            sorted.Reverse();
+            return sorted;
+        }
+        
+        static void Main(string[] args)                              //main 
+        {
 
-            Console.WriteLine("Students having 90% Collective marks are");
-
-            for ( int i=0; i< highGradestudent.Count;i++)
+            Program program = new Program();                                              //creating object to use function
+                                // Task 1
+            List<BasicInfo> registeredStudentData = program.AllCandidateData();             //getting all the data of selected students
+            
+            Console.WriteLine("All Regestered Candidates:   ");
+            for (int counter = 0; counter < registeredStudentData.Count; counter++)
             {
-                Console.WriteLine("Name:  " + highGradestudent[i].name + "  id:  " + highGradestudent[i].idCardNo + "  Total Marks: " + (highGradestudent[i].totalMarks/2)+"%");
+                BasicInfo print = registeredStudentData[counter];
+
+                Console.WriteLine(@"Name: " + print.name + "\t Id No:" + print.idNo +"\t City:"+ print.city + "\tCGPA:  " + print.GPA);
+
+            }
+
+
+                                 //Task 2
+            List<BasicInfo> selectedCandidates = program.SelectedStudents();                   //getting the students with more then 3 cgpa
+
+            Console.WriteLine("\n\nAll selected Candidates(3 or gretaer CGPA)");
+            for (int counter = 0; counter < selectedCandidates.Count(); counter++)
+            {
+                BasicInfo print = selectedCandidates[counter];
+
+                Console.WriteLine(@"Name: " + print.name + "\t Id No:" + print.idNo + "\t City:" + print.city + "\tCGPA:  " + print.GPA);
+
+            }
+
+                                //Task 3
+            List<BasicInfo> assignmentMarks = program.AssignmentMarks();                    //distribuiting random marks over students in 2 assignments
+
+            Console.WriteLine("\n\nStudents Assignment Marks:   ");
+
+            for (int counter = 0; counter < assignmentMarks.Count(); counter++)
+            {
+                BasicInfo print = assignmentMarks[counter];
+
+                Console.WriteLine(@"Name: " + print.name + "\t Id No:" + print.idNo + "\t Assign#1:" + print.assign1Marks + "\t Assign#2:  " + print.assign2Marks);
+
+            }
+
+
+
+                               //Task4
+            List<BasicInfo> highestgradestudent = program.HighGradeStudents();              //students scoring more then 90% marks in both assignments
+            
+            Console.WriteLine("\n\nStudents having 90% Collective marks are");
+
+            for (int counter = 0; counter < highestgradestudent.Count; counter++)
+            {
+                Console.WriteLine(@"Name: " + highestgradestudent[counter].name + "\t Id No:" + highestgradestudent[counter].idNo + "\t GPA:" + highestgradestudent[counter].GPA + "\t Total Marks:" + (highestgradestudent[counter].totalMarks / 2) + "%");
+            }
+
+
+
+                              //Task 6
+            List<BasicInfo> SortedListofAllCandidates = program.GetSortedListofallCandidates();
+
+            Console.WriteLine("\n\nSorted List of High Achievers:   ");                      
+            for (int counter = 0; counter < SortedListofAllCandidates.Count; counter++)
+            {
+                BasicInfo print = SortedListofAllCandidates[counter];
+
+                Console.WriteLine(@"Name: " + print.name + "\tId No: " + print.idNo + "\tCity: " + print.city + " \tTotal Marks: " + (SortedListofAllCandidates[counter].totalMarks / 2) + "%");
+
+
+            }
+
+
+            Console.WriteLine("\nStudents from Rawalpindi are:");                 
+            //Task 5
+            Dictionary<string, string> dic = new Dictionary<string, string>();
+            for (int i = 0; i < selectedCandidates.Count; i++)
+            {
+
+                dic.Add(selectedCandidates[i].name, selectedCandidates[i].city);
+            }
+            foreach (KeyValuePair<string, string> kvp in dic)
+            {
+                if (kvp.Value == "lhr")
+                {
+                    Console.WriteLine(kvp.Key);
+
+                }
+
             }
             Console.ReadLine();
 
 
+            
+
+           
+           
 
 
         }
+
+
+
+
+
     }
 }
